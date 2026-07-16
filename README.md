@@ -28,13 +28,19 @@ GitHub Pagesでホスティングして、TikTok for DevelopersアプリのSandb
    https://<あなたのユーザー名>.github.io/tiktok-sandbox-policy/
    ```
 
-5. TikTok for Developers のアプリ設定 → Sandbox → Privacy Policy URL に上記URLを登録。
+5. TikTok for Developers のアプリ設定で、以下のようにURLを登録する:
 
-6. 同じくアプリ設定 → Sandbox → Terms of Service URL に以下を登録:
+   | 項目 | URL |
+   |---|---|
+   | Web/Desktop URL(公式サイト) | `https://<あなたのユーザー名>.github.io/tiktok-sandbox-policy/` |
+   | Privacy Policy URL | `https://<あなたのユーザー名>.github.io/tiktok-sandbox-policy/privacy.html` |
+   | Terms of Service URL | `https://<あなたのユーザー名>.github.io/tiktok-sandbox-policy/terms.html` |
 
-   ```
-   https://<あなたのユーザー名>.github.io/tiktok-sandbox-policy/terms.html
-   ```
+## ページ構成
+
+- `index.html` … アプリの簡単な紹介ページ(Web/Desktop URLとして登録)
+- `privacy.html` … プライバシーポリシー
+- `terms.html` … 利用規約
 
 ## 注意
 

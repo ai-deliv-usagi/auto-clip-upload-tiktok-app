@@ -3,91 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>プライバシーポリシー | AIうさぎ TikTok連携アプリ</title>
+<title>AIうさぎ TikTok連携アプリ</title>
 <style>
   body { font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; line-height: 1.8; max-width: 760px; margin: 40px auto; padding: 0 20px; color: #222; }
-  h1 { font-size: 1.6em; border-bottom: 2px solid #333; padding-bottom: 8px; }
-  h2 { font-size: 1.2em; margin-top: 2em; border-left: 4px solid #666; padding-left: 8px; }
-  .updated { color: #666; font-size: 0.9em; }
-  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
-  th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; vertical-align: top; }
-  th { background: #f2f2f2; }
+  h1 { font-size: 1.7em; border-bottom: 2px solid #333; padding-bottom: 8px; }
+  h2 { font-size: 1.1em; margin-top: 2em; border-left: 4px solid #666; padding-left: 8px; }
+  .badge { display: inline-block; background: #f2f2f2; color: #555; font-size: 0.8em; padding: 2px 10px; border-radius: 12px; margin-bottom: 1em; }
+  nav a { margin-right: 1.2em; }
   footer { margin-top: 3em; font-size: 0.85em; color: #888; }
 </style>
 </head>
 <body>
 
-<h1>プライバシーポリシー</h1>
-<p class="updated">最終更新日: 2026年7月16日</p>
+<span class="badge">Sandbox / Development</span>
+<h1>AIうさぎ TikTok連携アプリ</h1>
 
 <p>
-本ページは、個人開発者(以下「開発者」)が開発するTikTok API連携アプリケーション
-「AIうさぎ TikTok連携アプリ」(以下「本アプリ」)におけるプライバシーポリシーです。
-本アプリは現在<strong>開発・動作検証(Sandbox環境)</strong>のために開発されているものであり、
-一般公開・商用サービスとしての提供は行っておりません。
+「AIうさぎ TikTok連携アプリ」は、TikTok Liveチャンネル「AIうさぎ」の運営者が個人で開発している、
+配信のハイライトクリップをTikTokへ自動投稿するための連携ツールです。
+現在は開発者本人による動作検証(Sandbox環境)のみで利用しており、一般ユーザー向けの公開サービスではありません。
 </p>
 
-<h2>1. 運営者情報</h2>
-<table>
-  <tr><th>運営者</th><td>個人開発者(@ai-deliv-usagi)</td></tr>
-  <tr><th>連絡先</th><td>本リポジトリの GitHub Issues よりご連絡ください</td></tr>
-  <tr><th>対象アプリ</th><td>AIうさぎ TikTok連携アプリ(Sandbox環境)</td></tr>
-</table>
-
-<h2>2. 取得する情報</h2>
-<p>本アプリはTikTok APIを通じて、以下の情報のみを取得します。</p>
-<table>
-  <tr><th>取得情報</th><th>取得元スコープ</th><th>用途</th></tr>
-  <tr>
-    <td>TikTokアカウントの基本プロフィール情報(ユーザー名、アイコン画像等)</td>
-    <td>user.info.basic</td>
-    <td>API連携動作確認・投稿主体の識別</td>
-  </tr>
-  <tr>
-    <td>本アプリを通じてアップロードする動画コンテンツおよびその投稿ステータス</td>
-    <td>video.publish / video.upload</td>
-    <td>動画投稿機能(自動クリップ投稿)の開発・動作検証</td>
-  </tr>
-</table>
-<p>
-上記以外の個人情報(氏名、メールアドレス、位置情報、連絡先リスト等)を取得することはありません。
-</p>
-
-<h2>3. 利用目的</h2>
+<h2>できること</h2>
 <ul>
-  <li>TikTok APIとの連携機能(動画自動投稿)の開発・デバッグ・動作検証</li>
-  <li>Sandbox環境における投稿フローのテスト</li>
+  <li>配信ログから生成した短尺クリップを、TikTok Content Posting APIを通じて投稿</li>
+  <li>投稿ステータスの取得・管理</li>
 </ul>
-<p>取得した情報を上記以外の目的(広告配信、第三者への販売・提供、プロファイリング等)に利用することはありません。</p>
 
-<h2>4. 第三者提供</h2>
+<h2>開発状況</h2>
 <p>
-取得した情報を第三者に提供・共有することはありません。ただし、法令に基づき開示を求められた場合はこの限りではありません。
+本アプリは現在Sandbox環境での開発・検証段階にあります。本番提供の予定は未定です。
 </p>
 
-<h2>5. データの保存・削除</h2>
-<p>
-取得したアクセストークンおよびプロフィール情報は、開発者が管理するクラウド環境(Google Cloud Platform)内に、
-動作検証に必要な期間のみ保存します。ユーザーはいつでも開発者に連絡することで、保存されたデータの削除を requestできます。
-また、TikTok側の連携解除(アプリ連携の取り消し)によりアクセス権は即時に無効化されます。
-</p>
-
-<h2>6. Cookie等のトラッキング技術</h2>
-<p>本ページ・本アプリはCookieや類似のトラッキング技術を使用していません。</p>
-
-<h2>7. プライバシーポリシーの変更</h2>
-<p>
-本ポリシーの内容は、本アプリの開発状況(Sandboxから本番環境への移行等)に応じて予告なく変更される場合があります。
-変更後の内容は本ページに掲載した時点で効力を生じるものとします。
-</p>
-
-<h2>8. お問い合わせ</h2>
-<p>本ポリシーおよび本アプリのデータ取り扱いに関するお問い合わせは、本リポジトリの GitHub Issues までお願いいたします。</p>
-
-<p><a href="./terms.html">利用規約はこちら</a></p>
+<nav>
+  <a href="./privacy.html">プライバシーポリシー</a>
+  <a href="./terms.html">利用規約</a>
+</nav>
 
 <footer>
-&copy; 2026 ai-deliv-usagi. This page is published for TikTok Developer sandbox review purposes.
+&copy; 2026 @ai-deliv-usagi
 </footer>
 
 </body>
