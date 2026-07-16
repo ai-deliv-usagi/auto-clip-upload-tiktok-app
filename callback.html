@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <title>連携処理中 | AI実況動画投稿</title>
   <style>
     :root {
@@ -78,34 +79,51 @@
     const error = params.get("error");
     const statusEl = document.getElementById("status");
 
+    function clearSensitiveQuery() {
+      if (window.location.search || window.location.hash) {
+        history.replaceState(null, "", window.location.pathname);
+      }
+    }
+
     function show(message, className) {
       statusEl.textContent = message;
       statusEl.className = className ? `status ${className}` : "status";
     }
 
-    if (error || !code) {
-      show("連携がキャンセルされました。");
-    } else if (!state) {
-      show("連携に失敗しました。時間をおいて再度お試しください。");
-    } else {
-      fetch(CLOUD_RUN_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, state }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === "ok") {
-            show("連携が完了しました。この画面は閉じて構いません。", "ok");
-          } else {
-            show("連携に失敗しました。時間をおいて再度お試しください。");
-          }
-        })
-        .catch((err) => {
-          console.error("TikTok OAuth callback failed", err);
-          show("連携処理中にエラーが発生しました。");
+    async function completeLink() {
+      if (error || !code) {
+        clearSensitiveQuery();
+        show("連携がキャンセルされました。");
+        return;
+      }
+
+      if (!state) {
+        clearSensitiveQuery();
+        show("連携に失敗しました。時間をおいて再度お試しください。");
+        return;
+      }
+
+      try {
+        const response = await fetch(CLOUD_RUN_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code, state }),
         });
+        clearSensitiveQuery();
+        const data = await response.json();
+        if (data.status === "ok") {
+          show("連携が完了しました。この画面は閉じて構いません。", "ok");
+        } else {
+          show("連携に失敗しました。時間をおいて再度お試しください。");
+        }
+      } catch (err) {
+        clearSensitiveQuery();
+        console.error("TikTok OAuth callback failed", err);
+        show("連携処理中にエラーが発生しました。");
+      }
     }
+
+    completeLink();
   </script>
 </body>
 </html>
