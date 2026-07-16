@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>プライバシーポリシー | AIうさぎ TikTok連携アプリ</title>
+<title>プライバシーポリシー | AI実況動画投稿</title>
 <style>
   body { font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; line-height: 1.8; max-width: 760px; margin: 40px auto; padding: 0 20px; color: #222; }
   h1 { font-size: 1.6em; border-bottom: 2px solid #333; padding-bottom: 8px; }
@@ -22,7 +22,7 @@
 
 <p>
 本ページは、個人開発者(以下「開発者」)が開発するTikTok API連携アプリケーション
-「AIうさぎ TikTok連携アプリ」(以下「本アプリ」)におけるプライバシーポリシーです。
+「AI実況動画投稿」(以下「本アプリ」)におけるプライバシーポリシーです。
 本アプリは現在<strong>開発・動作検証(Sandbox環境)</strong>のために開発されているものであり、
 一般公開・商用サービスとしての提供は行っておりません。
 </p>
@@ -31,26 +31,31 @@
 <table>
   <tr><th>運営者</th><td>TikTokアカウント @ai-deliv-usagi 運営者(個人開発)</td></tr>
   <tr><th>連絡先</th><td>本リポジトリの GitHub Issues よりご連絡ください</td></tr>
-  <tr><th>対象アプリ</th><td>AIうさぎ TikTok連携アプリ(Sandbox環境)</td></tr>
+  <tr><th>対象アプリ</th><td>AI実況動画投稿(Sandbox環境)</td></tr>
 </table>
 
 <h2>2. 取得する情報</h2>
-<p>本アプリはTikTok APIを通じて、以下の情報のみを取得します。</p>
+<p>本アプリはTikTok API(Login Kit・Content Posting API)を通じて、以下の情報のみを取得します。</p>
 <table>
-  <tr><th>取得情報</th><th>取得元スコープ</th><th>用途</th></tr>
+  <tr><th>取得情報</th><th>取得元スコープ / 機能</th><th>用途</th></tr>
   <tr>
     <td>TikTokアカウントの基本プロフィール情報(ユーザー名、アイコン画像等)</td>
-    <td>user.info.basic</td>
-    <td>API連携動作確認・投稿主体の識別</td>
+    <td>Login Kit(OAuth認証) / user.info.basic</td>
+    <td>本アプリを通じたTikTokアカウントへのログイン認証、および投稿主体の識別</td>
   </tr>
   <tr>
     <td>本アプリを通じてアップロードする動画コンテンツおよびその投稿ステータス</td>
-    <td>video.publish / video.upload</td>
-    <td>動画投稿機能(自動クリップ投稿)の開発・動作検証</td>
+    <td>Content Posting API / video.upload</td>
+    <td>動画投稿機能(自動クリップ投稿)の開発・動作検証。TikTok側での自動公開(Direct Post)は行わず、下書き(Draft)としてのアップロードのみ利用</td>
   </tr>
 </table>
 <p>
 上記以外の個人情報(氏名、メールアドレス、位置情報、連絡先リスト等)を取得することはありません。
+</p>
+<p>
+なお、本アプリのログイン機能(Login Kit)は、開発者自身が運営するTikTokアカウント
+「中国うさぎ@Live配信でAI実況」(@ai-deliv-usagi)を本アプリと連携させるための認証機能であり、
+不特定多数の一般ユーザーに向けたログインサービスを提供するものではありません。
 </p>
 
 <h2>3. 利用目的</h2>
