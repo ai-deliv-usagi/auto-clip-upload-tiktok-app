@@ -46,7 +46,15 @@
   <tr>
     <td>本アプリを通じてアップロードする動画コンテンツおよびその投稿ステータス</td>
     <td>Content Posting API / video.upload</td>
-    <td>動画投稿機能(自動クリップ投稿)の開発・動作検証。TikTok側での自動公開(Direct Post)は行わず、下書き(Draft)としてのアップロードのみ利用</td>
+    <td>動画コンテンツを下書き(Draft)としてTikTokの受信箱にアップロードする機能。
+    最終的な投稿操作はTikTokアプリ側でクリエイター自身が行う。</td>
+  </tr>
+  <tr>
+    <td>本アプリを通じて投稿する動画コンテンツおよびその投稿ステータス</td>
+    <td>Content Posting API / video.publish</td>
+    <td>動画投稿機能(自動クリップ投稿・Direct Post)の開発・動作検証。TikTok側の審査(Audit)
+    通過後は選択した公開範囲での投稿が行われる。審査完了までの投稿は非公開(Private)扱いに
+    制限される。</td>
   </tr>
 </table>
 <p>
