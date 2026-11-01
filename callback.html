@@ -62,68 +62,81 @@
     .ok {
       color: var(--accent);
     }
+
+    textarea {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 0.85rem;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 8px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    [hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>TikTok連携</h1>
-    <p>AI実況動画投稿との連携を処理しています。</p>
-    <p id="status" class="status">連携処理中です...</p>
+    <p>AI実況動画投稿の認可結果です。このページは結果を表示するだけで、どこにも送信しません。</p>
+    <p id="status" class="status">認可結果を確認しています...</p>
+    <div id="result" hidden>
+      <p>下の文字列をコピーして、PCで実行中の <code>tiktok_auth.py</code> に貼り付けてください。数分で無効になります。</p>
+      <textarea id="callback" rows="4" readonly></textarea>
+      <button id="copy" type="button">コピー</button>
+    </div>
   </main>
 
   <script>
-    const CLOUD_RUN_ENDPOINT = "https://ai-delivery-tiktok-oauth-ddq5wqsedq-an.a.run.app/api/tiktok/oauth/callback";
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
-    const state = params.get("state");
     const error = params.get("error");
     const statusEl = document.getElementById("status");
-
-    function clearSensitiveQuery() {
-      if (window.location.search || window.location.hash) {
-        history.replaceState(null, "", window.location.pathname);
-      }
-    }
 
     function show(message, className) {
       statusEl.textContent = message;
       statusEl.className = className ? `status ${className}` : "status";
     }
 
-    async function completeLink() {
-      if (error || !code) {
-        clearSensitiveQuery();
-        show("連携がキャンセルされました。");
-        return;
+    if (error || !code) {
+      show("連携がキャンセルされたか、失敗しました。PCの画面からやり直してください。");
+    } else {
+      const result = new URLSearchParams();
+      result.set("code", code);
+      if (params.get("state")) {
+        result.set("state", params.get("state"));
       }
-
-      if (!state) {
-        clearSensitiveQuery();
-        show("連携に失敗しました。時間をおいて再度お試しください。");
-        return;
-      }
-
-      try {
-        const response = await fetch(CLOUD_RUN_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code, state }),
-        });
-        clearSensitiveQuery();
-        const data = await response.json();
-        if (data.status === "ok") {
-          show("連携が完了しました。この画面は閉じて構いません。", "ok");
-        } else {
-          show("連携に失敗しました。時間をおいて再度お試しください。");
+      const box = document.getElementById("callback");
+      box.value = result.toString();
+      document.getElementById("result").hidden = false;
+      show("許可されました。", "ok");
+      document.getElementById("copy").addEventListener("click", async () => {
+        box.select();
+        try {
+          await navigator.clipboard.writeText(box.value);
+          show("コピーしました。PCの画面に貼り付けてください。", "ok");
+        } catch (err) {
+          show("自動コピーできませんでした。文字列を選択してコピーしてください。");
         }
-      } catch (err) {
-        clearSensitiveQuery();
-        console.error("TikTok OAuth callback failed", err);
-        show("連携処理中にエラーが発生しました。");
-      }
+      });
     }
-
-    completeLink();
+    // 履歴やブックマークにコードを残さない
+    history.replaceState(null, "", window.location.pathname);
   </script>
 </body>
 </html>
